@@ -25,7 +25,7 @@ export type IProductDocument = mongoose.Document & {
 
 const productSchema = new mongoose.Schema(
   { 
-    _id: {type: Schema.Types.ObjectId},
+    
     id:{type: Number},
     title: { type: String }, // tên hiển thị
     img: { type: String }, 
