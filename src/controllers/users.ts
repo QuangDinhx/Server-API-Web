@@ -15,6 +15,10 @@ const getAll = async (req: Request, res: Response) => {
   let result = await userRepo.getAll();
   return res.send(result);
 };
+const getAllAdmin = async (req: Request, res: Response) => {
+  let result = await userRepo.getAllAdmin();
+  return res.send(result);
+};
 const update = async (req: Request, res: Response) => {
   let grade = req.body;
   let gradeInput = plainToClass(UsersDto, grade);
@@ -42,6 +46,7 @@ export const userController = {
   add,
   update,
   getAll,
+  getAllAdmin,
   remove,
   getById,
   getUserwithKey

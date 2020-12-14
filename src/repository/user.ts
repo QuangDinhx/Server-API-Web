@@ -16,7 +16,16 @@ const add = async (input:UsersDto) => {
 };
 const getAll = async () => {
   try {
-    let users = await Users.find();
+    let users = await Users.find({active:true,permission:'user'});
+    
+    return handleStatus(200, null, users);
+  } catch (e) {
+    return handleStatus(500, e);
+  }
+};
+const getAllAdmin = async () => {
+  try {
+    let users = await Users.find({active:true,permission:'admin'});
     
     return handleStatus(200, null, users);
   } catch (e) {
@@ -31,7 +40,7 @@ const getById = async (id: string) => {
 const remove = async (id: string) => {
   let user = await Users.findById(id);
   if (!user) return handleStatus(404);
-  
+  user.active = false;
   try {
     await user.save();
     return handleStatus(200);
@@ -55,6 +64,7 @@ const update = async (input: UsersDto) => {
 const getuserwithKey = async (key?: String) => {
   try {
     let users = await Users.find({
+      active:true,
       userName:  key ,
     })
       
@@ -65,4 +75,4 @@ const getuserwithKey = async (key?: String) => {
 };
 
 const restore = async () => {};
-export const userRepo = { add, getAll, getById, remove, update, getuserwithKey };
+export const userRepo = { add, getAll,getAllAdmin, getById, remove, update, getuserwithKey };

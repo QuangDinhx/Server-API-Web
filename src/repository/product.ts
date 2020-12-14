@@ -57,7 +57,7 @@ const update = async (input: ProductDto) => {
 const getAllProductwithKey = async (key?: string) => {
   try {
     let products = await Products.find({
-      
+      active:true,
       title: { $regex: key || /^.*/, $options: "i" }
     })
       

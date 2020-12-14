@@ -5,6 +5,7 @@ import { uploadCoverGrade } from "../services/upload";
 const userRouter  = express.Router();
 userRouter 
   .get("/", userController.getAll)
+  .get("/admin", userController.getAllAdmin)
   .get("/search",userController.getUserwithKey)
   .get("/:id", userController.getById)
   .post("/add",  userController.add)
